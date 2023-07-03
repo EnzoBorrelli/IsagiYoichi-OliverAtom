@@ -7,38 +7,38 @@ Motor *MotorB = new Motor(PWM_MOTOR_B1, PWM_MOTOR_B2, PIN_MOTOR_B1, PIN_MOTOR_B2
 
 
 
-void RobotUp(int speedA, int speedB) {
-  MotorA->MotorUp(speedA);
-  MotorB->MotorUp(speedB);
+void RobotUp(int speed) {
+  MotorA->MotorUp(speed);
+  MotorB->MotorUp(speed);
 }
-void RobotUpLeft(int speedA, int speedB) {
-  MotorA->MotorUp(speedA);
-  MotorB->MotorUp(speedB);
+void RobotUpLeft(int speed) {
+  MotorA->MotorUp(speed);
+  MotorB->MotorUp(speed);
 }
-void RobotLeft(int speedA, int speedB) {
-  MotorA->MotorUp(speedA);
-  MotorB->MotorDown(speedB);
+void RobotLeft(int speed) {
+  MotorA->MotorUp(speed);
+  MotorB->MotorDown(speed);
 }
-void RobotUpRight(int speedA, int speedB) {
-  MotorA->MotorUp(speedA);
-  MotorB->MotorUp(speedB);
+void RobotUpRight(int speed) {
+  MotorA->MotorUp(speed);
+  MotorB->MotorUp(speed);
 }
-void RobotRight(int speedA, int speedB) {
-  MotorA->MotorDown(speedA);
-  MotorB->MotorUp(speedB);
+void RobotRight(int speed) {
+  MotorA->MotorDown(speed);
+  MotorB->MotorUp(speed);
 }
 
-void RobotDown(int speedA, int speedB) {
-  MotorA->MotorDown(speedA);
-  MotorB->MotorDown(speedB);
+void RobotDown(int speed) {
+  MotorA->MotorDown(speed);
+  MotorB->MotorDown(speed);
 }
-void RobotDownLeft(int speedA, int speedB) {
-  MotorA->MotorDown(speedA);
-  MotorB->MotorDown(speedB);
+void RobotDownLeft(int speed) {
+  MotorA->MotorDown(speed);
+  MotorB->MotorDown(speed);
 }
-void RobotDownRight(int speedA, int speedB) {
-  MotorA->MotorDown(speedA);
-  MotorB->MotorDown(speedB);
+void RobotDownRight(int speed) {
+  MotorA->MotorDown(speed);
+  MotorB->MotorDown(speed);
 }
 
 void RobotStop() {
