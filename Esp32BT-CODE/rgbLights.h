@@ -1,0 +1,9 @@
+int red[3] = { 255, 0, 0 };
+int green[3] = { 0, 255, 0 };
+int blue[3] = { 0, 0, 255 };
+int violet[3] = { 120, 0, 215 };
+int purple[3] = { 215, 0, 125 };
+int yellow[3] = { 250, 80, 0 };
+int orange[3] = { 255, 20, 0 };
+int cyan[3] = { 0, 120, 255 };
+int white[3] = { 255, 255, 255 };

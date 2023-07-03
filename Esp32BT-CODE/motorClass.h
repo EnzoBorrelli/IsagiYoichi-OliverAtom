@@ -32,7 +32,7 @@ public:
     ledcWrite(_pwmMotorB, speed);
     ledcWrite(_pwmMotorA, LOW);
   }
-  void MotorStop(){
+  void MotorStop() {
     ledcWrite(_pwmMotorA, LOW);
     ledcWrite(_pwmMotorB, LOW);
   }

@@ -2,15 +2,25 @@
 #include <ps4_int.h>
 
 #include "MotorBehaviour.h"
+#include "rgbLights.h"
 
 #define NITRO_SPEED 255
 #define NORMAL_SPEED 160
-int speedControlUp = NORMAL_SPEED;
-int speedControlDown = NORMAL_SPEED;
-int speedControlLeft = NORMAL_SPEED;
-int speedControlRight = NORMAL_SPEED;
+#define STAND_BY 0
+
+int ControlUp = STAND_BY;
+int ControlDown = STAND_BY;
+int ControlLeft = STAND_BY;
+int ControlRight = STAND_BY;
+
+int speedControl = NORMAL_SPEED;
 
 
+void ps4ledChange(int red, int green, int blue) {
+  PS4.setLed(red, green, blue);
+  PS4.sendToController();
+  delay(10);
+}
 
 void setup() {
   Serial.begin(115200);
@@ -24,10 +34,10 @@ void setup() {
 
 void loop() {
   if (PS4.isConnected()) {
-    bool GoForward = (speedControlUp > 150) && ((speedControlLeft + speedControlRight) < 10);
-    bool GoBackwards = (speedControlDown > 150) && ((speedControlLeft + speedControlRight) < 10);
-    bool GoLeft = (speedControlLeft > 150) && ((speedControlUp + speedControlDown) < 10);
-    bool GoRight = (speedControlRight > 150) && ((speedControlUp + speedControlDown) < 10);
+    bool GoForward = (ControlUp > 150) && ((ControlLeft + ControlRight) < 10);
+    bool GoBackwards = (ControlDown > 150) && ((ControlLeft + ControlRight) < 10);
+    bool GoLeft = (ControlLeft > 150) && ((ControlUp + ControlDown) < 10);
+    bool GoRight = (ControlRight > 150) && ((ControlUp + ControlDown) < 10);
 
     if (PS4.Square()) Serial.println("Square Button");
     if (PS4.Cross()) Serial.println("Cross Button");
@@ -46,29 +56,27 @@ void loop() {
 
     if (PS4.L2()) {
 
-      int speed = map(PS4.L2Value(), 0, 255, 0, 180);
-      Serial.println("la velocidad es " + (String)speed);
+      speedControl = STAND_BY;
     }
     if (PS4.R2()) {
-      int speed = PS4.R2Value();
-      Serial.println("la velocidad es " + (String)speed);
+      speedControl = NITRO_SPEED;
     }
 
     if (PS4.LStickX()) {
-      speedControlRight = map(PS4.LStickX(), 5, 127, 0, NORMAL_SPEED);
-      if (speedControlRight < 0) speedControlRight = 0;
-      speedControlLeft = map(PS4.LStickX(), -5, -128, 0, NORMAL_SPEED);
-      if (speedControlLeft < 0) speedControlLeft = 0;
-      /*Serial.println("right speed: " + (String)speedControlRight);
-      Serial.println("left speed: " + (String)speedControlLeft);*/
+      ControlRight = map(PS4.LStickX(), 5, 127, 0, NORMAL_SPEED);
+      if (ControlRight < 0) ControlRight = 0;
+      ControlLeft = map(PS4.LStickX(), -5, -128, 0, NORMAL_SPEED);
+      if (ControlLeft < 0) ControlLeft = 0;
+      /*Serial.println("right speed: " + (String)ControlRight);
+      Serial.println("left speed: " + (String)ControlLeft);*/
     }
     if (PS4.LStickY()) {
-      speedControlUp = map(PS4.LStickY(), 5, 127, 0, NORMAL_SPEED);
-      if (speedControlUp < 0) speedControlUp = 0;
-      speedControlDown = map(PS4.LStickY(), -5, -128, 0, NORMAL_SPEED);
-      if (speedControlDown < 0) speedControlDown = 0;
-      /* Serial.println("Up speed: " + (String)speedControlUp);
-      Serial.println("Down speed: " + (String)speedControlDown);*/
+      ControlUp = map(PS4.LStickY(), 5, 127, 0, NORMAL_SPEED);
+      if (ControlUp < 0) ControlUp = 0;
+      ControlDown = map(PS4.LStickY(), -5, -128, 0, NORMAL_SPEED);
+      if (ControlDown < 0) ControlDown = 0;
+      /* Serial.println("Up speed: " + (String)ControlUp);
+      Serial.println("Down speed: " + (String)ControlDown);*/
     }
     if (GoForward) Serial.println("going comando");
     if (GoBackwards) Serial.println("going to B");
